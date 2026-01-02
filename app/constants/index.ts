@@ -183,58 +183,64 @@ export const resumes: ResumeInterface[] = [
 ];
 
 export const AIResponseFormat = `
-      interface Feedback {
-      overallScore: number; //max 100
-      ATS: {
-        score: number; //rate based on ATS suitability
-        tips: {
-          type: "good" | "improve";
-          tip: string; //give 3-4 tips
-        }[];
-      };
-      toneAndStyle: {
-        score: number; //max 100
-        tips: {
-          type: "good" | "improve";
-          tip: string; //make it a short "title" for the actual explanation
-          explanation: string; //explain in detail here
-        }[]; //give 3-4 tips
-      };
-      content: {
-        score: number; //max 100
-        tips: {
-          type: "good" | "improve";
-          tip: string; //make it a short "title" for the actual explanation
-          explanation: string; //explain in detail here
-        }[]; //give 3-4 tips
-      };
-      structure: {
-        score: number; //max 100
-        tips: {
-          type: "good" | "improve";
-          tip: string; //make it a short "title" for the actual explanation
-          explanation: string; //explain in detail here
-        }[]; //give 3-4 tips
-      };
-      skills: {
-        score: number; //max 100
-        tips: {
-          type: "good" | "improve";
-          tip: string; //make it a short "title" for the actual explanation
-          explanation: string; //explain in detail here
-        }[]; //give 3-4 tips
-      };
-    }`;
+Return ONLY valid JSON in the following exact structure.
+Do NOT include comments, markdown, or text outside JSON.
+If you include anything outside JSON, the response is invalid.
+{
+  "overallScore": 0,
+  "ATS": {
+    "score": 0,
+    "tips": [
+      {
+        "type": "good",
+        "tip": "string"
+      }
+    ]
+  },
+  "toneAndStyle": {
+    "score": 0,
+    "tips": [
+      {
+        "type": "good",
+        "tip": "string",
+        "explanation": "string"
+      }
+    ]
+  },
+  "content": {
+    "score": 0,
+    "tips": [
+      {
+        "type": "good",
+        "tip": "string",
+        "explanation": "string"
+      }
+    ]
+  },
+  "structure": {
+    "score": 0,
+    "tips": [
+      {
+        "type": "good",
+        "tip": "string",
+        "explanation": "string"
+      }
+    ]
+  },
+  "skills": {
+    "score": 0,
+    "tips": [
+      {
+        "type": "good",
+        "tip": "string",
+        "explanation": "string"
+      }
+    ]
+  }
+}
+`;
 
-export const prepareInstructions = ({
-  jobTitle,
-  jobDescription,
-  AIResponseFormat,
-}: {
-  jobTitle: string;
-  jobDescription: string;
-  AIResponseFormat: string;
-}) =>
+export const prepareInstructions = ({ jobTitle, jobDescription }: { jobTitle: string; jobDescription: string }) =>
   `You are an expert in ATS (Applicant Tracking System) and resume analysis.
   Please analyze and rate this resume and suggest how to improve it.
   The rating can be low if the resume is bad.
